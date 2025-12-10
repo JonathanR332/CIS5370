@@ -1,0 +1,27 @@
+Patient Name: Peter Parker (Spider-Man)
+Species: Human
+Age: 18 years
+Gender: Male
+
+Reason for Check-Up: Web-slinging strain and minor abrasions.
+
+Medical History:
+
+Occasional bruises from crime-fighting
+
+No chronic illnesses
+
+Vital Signs:
+
+Heart Rate: 88 bpm
+
+Temperature: 36.7°C
+
+Blood Pressure: 115/75 mmHg
+
+Respiratory Rate: 16 breaths/min
+
+Diagnosis: Mild muscle strain and skin abrasions
+Treatment Plan: Rest, hydration, topical antiseptic, light stretching
+
+Attending Physician: Dr. Otto Octavius

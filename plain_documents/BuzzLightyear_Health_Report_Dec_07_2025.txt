@@ -1,0 +1,27 @@
+Patient Name: Buzz Lightyear
+Species: Action Figure (sentient)
+Age: Unknown
+Gender: Male
+
+Reason for Admission: Joint stiffness after intergalactic training exercises.
+
+Medical History:
+
+Previous wing hinge repairs
+
+No chronic illnesses
+
+Vital Signs:
+
+Heart Rate: N/A (mechanical)
+
+Temperature: N/A
+
+Structural integrity: 95%
+
+Mobility: Slight stiffness in left wing
+
+Diagnosis: Mild mechanical strain
+Treatment Plan: Lubricate joints, light exercise, monitor hinge integrity
+
+Attending Physician: Dr. Andy’s Toy Clinic

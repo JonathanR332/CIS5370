@@ -1,0 +1,27 @@
+Patient Name: SpongeBob SquarePants
+Species: Sea Sponge
+Age: 12 years (in sponge years)
+Gender: Male
+
+Reason for Check-Up: Overexertion from jellyfishing activities.
+
+Medical History:
+
+Minor burns from kitchen accidents
+
+No chronic illnesses
+
+Vital Signs:
+
+Heart Rate: 95 bpm
+
+Temperature: 36.6°C
+
+Blood Pressure: 110/70 mmHg
+
+Respiratory Rate: 14 breaths/min
+
+Diagnosis: Mild fatigue and dehydration
+Treatment Plan: Rest, hydration, energy replenishment
+
+Attending Physician: Dr. Patrick Star, RN

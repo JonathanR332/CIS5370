@@ -1,0 +1,60 @@
+Hospital Name: Springfield General Hospital
+Patient ID: HS-031
+Patient Name: Homer Simpson
+Species: Human
+Age: 39 years
+Gender: Male
+
+Date of Admission: 2025-12-07
+Date of Report: 2025-12-07
+
+Reason for Admission: Head injury from falling at work (nuclear power plant).
+
+Medical History:
+
+Occasional minor injuries from accidents
+
+Obesity
+
+High cholesterol
+
+History of alcohol consumption
+
+Vital Signs:
+
+Heart Rate: 105 bpm
+
+Temperature: 37.2°C
+
+Blood Pressure: 145/90 mmHg
+
+Respiratory Rate: 18 breaths/min
+
+Physical Examination:
+
+Head: Minor contusion on the forehead
+
+Limbs: No fractures, slight bruising on right arm
+
+Abdomen: Soft, no tenderness
+
+Alertness: Slightly dazed, coherent speech
+
+Diagnosis: Mild concussion and bruising
+
+Treatment Plan:
+
+Apply ice pack to forehead
+
+Monitor for concussion symptoms (nausea, dizziness, confusion)
+
+Pain relief as needed (acetaminophen)
+
+Rest for 24–48 hours
+
+Follow-up check if symptoms persist
+
+Notes: Patient is stable. Advised to avoid strenuous activity and alcohol until fully recovered.
+
+Attending Physician: Dr. Hibbert
+Signature: ____________________

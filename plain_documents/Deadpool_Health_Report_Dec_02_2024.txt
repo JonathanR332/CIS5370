@@ -1,0 +1,29 @@
+Patient Name: Deadpool
+Species: Human (mutant)
+Age: 32 years
+Gender: Male
+
+Reason for Admission: Multiple minor injuries sustained during mercenary activities.
+
+Medical History:
+
+Accelerated healing factor
+
+Previous combat wounds
+
+No chronic illnesses
+
+Vital Signs:
+
+Heart Rate: 102 bpm
+
+Temperature: 36.8°C
+
+Blood Pressure: 125/80 mmHg
+
+Respiratory Rate: 18 breaths/min
+
+Diagnosis: Minor lacerations and bruises
+Treatment Plan: Clean and bandage wounds, monitor healing, pain management as needed
+
+Attending Physician: Dr. Vanessa Carlysle

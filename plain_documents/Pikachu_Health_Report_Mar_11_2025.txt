@@ -1,0 +1,58 @@
+Hospital Name: Pokémon General Hospital
+Patient ID: P-00127
+Patient Name: Pikachu
+Species: Pokémon (Electric Type)
+Age: 5 years
+Gender: Male
+
+Date of Admission: 2025-12-07
+Date of Report: 2025-12-07
+
+Reason for Admission: Frequent fatigue and minor electric discharges causing accidental short circuits.
+
+Medical History:
+
+No major injuries reported
+
+Previous check-up normal
+
+Vaccinations up to date (Thunderbolt Shot, Anti-Poison Serum)
+
+Vital Signs:
+
+Heart Rate: 120 bpm
+
+Temperature: 36.8°C
+
+Blood Pressure: 85/60 mmHg
+
+Respiratory Rate: 20 breaths/min
+
+Physical Examination:
+
+Coat: Bright yellow, healthy
+
+Eyes: Clear and alert
+
+Ears: Clean, responsive to sound
+
+Limbs: Normal movement, no fractures
+
+Electric sacs: Mild overcharge detected
+
+Diagnosis: Mild electric overexertion, minor fatigue
+
+Treatment Plan:
+
+Rest for 24 hours in a low-stress environment
+
+Administer electrolyte solution
+
+Light sparring exercises after recovery
+
+Monitor electric discharge levels daily
+
+Notes: Pikachu responded well to initial care and shows a positive prognosis.
+
+Attending Physician: Dr. Meowth P. Clinic
+Signature: ____________________

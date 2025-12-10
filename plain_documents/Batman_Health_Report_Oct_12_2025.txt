@@ -1,0 +1,27 @@
+Patient Name: Bruce Wayne (Batman)
+Species: Human
+Age: 35 years
+Gender: Male
+
+Reason for Admission: Minor injuries from rooftop patrol.
+
+Medical History:
+
+Previous combat injuries
+
+No chronic illnesses
+
+Vital Signs:
+
+Heart Rate: 80 bpm
+
+Temperature: 36.8°C
+
+Blood Pressure: 120/78 mmHg
+
+Respiratory Rate: 16 breaths/min
+
+Diagnosis: Bruised ribs, mild exhaustion
+Treatment Plan: Pain relief, rest, physical therapy
+
+Attending Physician: Dr. Leslie Thompkins

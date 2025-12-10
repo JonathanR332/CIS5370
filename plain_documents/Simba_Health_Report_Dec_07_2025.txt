@@ -1,0 +1,27 @@
+Patient Name: Simba
+Species: Lion
+Age: 5 years
+Gender: Male
+
+Reason for Check-Up: Routine physical and minor paw abrasions.
+
+Medical History:
+
+No chronic illnesses
+
+Previous minor scrapes during cubhood
+
+Vital Signs:
+
+Heart Rate: 90 bpm
+
+Temperature: 38.2°C
+
+Blood Pressure: 120/75 mmHg
+
+Respiratory Rate: 20 breaths/min
+
+Diagnosis: Minor paw abrasions, overall healthy
+Treatment Plan: Clean and bandage paws, rest, monitor activity
+
+Attending Physician: Dr. Rafiki

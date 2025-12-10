@@ -1,0 +1,62 @@
+Hospital Name: Galactic Medical Center
+Patient ID: DV-042
+Patient Name: Darth Vader
+Species: Human (Cyborg)
+Age: 45 years
+Gender: Male
+
+Date of Admission: 2025-12-07
+Date of Report: 2025-12-07
+
+Reason for Admission: Respiratory distress due to malfunctioning life-support suit.
+
+Medical History:
+
+Severe burns covering >80% of body
+
+Chronic reliance on cybernetic systems for breathing and mobility
+
+Previous surgeries for cybernetic implants
+
+History of combat-related injuries
+
+Vital Signs:
+
+Heart Rate: 90 bpm
+
+Temperature: 37°C
+
+Blood Pressure: 130/85 mmHg
+
+Respiratory Rate: 18 breaths/min (mechanically assisted)
+
+Physical Examination:
+
+Cybernetic limbs: Fully operational
+
+Breathing apparatus: Minor leakage detected
+
+Skin: Scar tissue from previous injuries
+
+Mobility: Dependent on cybernetic enhancements
+
+Alertness: Fully conscious, responsive
+
+Diagnosis: Malfunctioning respiratory system due to life-support suit impairment; minor dehydration
+
+Treatment Plan:
+
+Immediate repair of life-support suit
+
+IV fluids for hydration
+
+Continuous monitoring of vital signs
+
+Respiratory therapy to ensure proper oxygenation
+
+Follow-up maintenance for cybernetic implants
+
+Notes: Patient stable after emergency intervention; prognosis dependent on life-support system maintenance.
+
+Attending Physician: Dr. Tarkin Medica
+Signature: ____________________
