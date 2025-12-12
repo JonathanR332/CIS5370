@@ -2,291 +2,329 @@ import os
 from cryptography.fernet import Fernet
 from datetime import datetime
 
-# -------------------- USERS --------------------
-
+# users for the login
 USERS = {
-    "JRizo": {"password": "123", "role": "admin"},
-    "admin": {"password": "123", "role": "admin"},
-    "user": {"password": "123", "role": "user"}
+    "JRizo": {"password": "123", "role":"admin"}, #my user
+    "admin": {"password":"123", "role":"admin"}, #generic admin user
+    "user": {"password":"123", "role":"user"} #generic user
 }
 
-# -------------------- FILE PATHS --------------------
-
+# These paths are easily changed, if you are not using the same setup as given in the github please change.
 CLIENT_FILE = "Clients/clients.txt"
 PLAIN_DOC_DIR = "plain_documents"
 ENC_DOC_DIR = "encrypted_documents"
 KEY_FILE = "vault.key"
 LOG_FILE = "access.log"
 
+# making sure folders exist (they should anyway)
 os.makedirs(PLAIN_DOC_DIR, exist_ok=True)
 os.makedirs(ENC_DOC_DIR, exist_ok=True)
 
-# -------------------- LOAD CLIENTS --------------------
 
-def load_clients():
+
+# loading the client list from txt file again this is interchangable.
+def load_clients_file():
     if not os.path.exists(CLIENT_FILE):
         return []
+    data = []
     with open(CLIENT_FILE, "r", encoding="utf-8") as f:
-        return [line.strip() for line in f if line.strip()]
+        for line in f:
+            if line.strip():
+                data.append(line.strip())
+    return data
 
-clients = load_clients()
+clients = load_clients_file()
 
-# -------------------- ENCRYPTION SETUP --------------------
 
+
+# encryption key stuff
 if not os.path.exists(KEY_FILE):
-    key = Fernet.generate_key()
+    # making a key just it case it does not exist. This will not work at all without it.
+    k = Fernet.generate_key() #using Fernet to generate my key (This is the encryption technique.)
     with open(KEY_FILE, "wb") as f:
-        f.write(key)
+        f.write(k)
 else:
+    # read the key again
     with open(KEY_FILE, "rb") as f:
         key = f.read()
 
 cipher = Fernet(key)
 
-# -------------------- DECRYPT FILE OPTION --------------------
 
-def decrypt_file(user):
-    files = [f for f in os.listdir(ENC_DOC_DIR) if f.endswith(".enc")]
 
-    if not files:
-        print("No encrypted files found.")
-        pause()
-        return
-
-    clear()
-    print("=== DECRYPT A FILE ===\n")
-    for i, f in enumerate(files, start=1):
-        print(f"{i}. {f}")
-
-    try:
-        choice = int(input("\nSelect file number: "))
-        enc_fname = files[choice - 1]
-    except:
-        print("Invalid selection.")
-        pause()
-        return
-
-    enc_path = os.path.join(ENC_DOC_DIR, enc_fname)
-    out_fname = enc_fname.replace(".enc", "")
-    out_path = os.path.join(PLAIN_DOC_DIR, out_fname)
-
-    try:
-        with open(enc_path, "rb") as f:
-            decrypted = cipher.decrypt(f.read())
-
-        with open(out_path, "wb") as f:
-            f.write(decrypted)
-
-        print(f"Decrypted file saved to: {out_path}")
-        log_event(user, f"Decrypted {enc_fname}")
-        pause()
-    except Exception as e:
-        print("Decryption failed:", e)
-        pause()
-
-# -------------------- LOAD DOCUMENT FILES --------------------
-
-def load_documents():
-    docs = []
-    for i, fname in enumerate(os.listdir(PLAIN_DOC_DIR), start=1):
-        if fname.endswith(".txt"):
-            docs.append({"id": i, "title": fname})
-    return docs
-
-# -------------------- UTILITIES --------------------
-
+# small helpers
 def clear():
-    os.system("cls" if os.name == "nt" else "clear")
+    os.system("cls" if os.name=="nt" else "clear")
 
 def pause():
     input("\nPress ENTER to continue...")
 
-def log_event(user, action):
+def log_event(user, txt):
     with open(LOG_FILE, "a") as f:
-        f.write(f"{datetime.now()} | {user} | {action}\n")
+        f.write(f"{datetime.now()} | {user} | {txt}\n")
 
-# -------------------- LOGIN --------------------
 
+
+# login screen
 def login():
     clear()
-    print("=== SECURE LOGIN ===\n")
-    u = input("Username: ")
-    p = input("Password: ")
+    print("Welcome please Login!")
+    loginUser = input("Username: ")
+    pword = input("Password: ")
 
-    user = USERS.get(u)
-    if user and user["password"] == p:
-        log_event(u, "Logged in")
-        return u, user["role"]
+    if loginUser in USERS and USERS[loginUser]["password"] == pword:
+        log_event(loginUser, "Logged in")
+        return loginUser, USERS[loginUser]["role"]
     else:
-        print("Invalid credentials.")
+        print("Login failed. Please try again!") 
         pause()
-        return None, None
+        return None, None #sends you back
 
-# -------------------- CLIENTS FROM TXT --------------------
 
+
+# show clients from the txt file
 def show_clients(user):
-    filtered = clients.copy()
+    filtered = clients[:]  # copy of the original list
 
     while True:
         clear()
-        print("=== CLIENT LIST (FROM FILE) ===\n")
+        print("=== CLIENT LIST ===\n")
+
+        # for demo purposes we have created a clients.txt file with only 50 patients.
         for c in filtered[:50]:
             print(c)
+
         print(f"\nTotal Clients: {len(filtered)}")
 
-        print("\n[s] Search | [r] Reset | [q] Back")
-        choice = input("Choice: ").lower()
+        print("\n(s) Search  | (r) Reset | (q) Quit") #menu, this will be repeated in the other functions.
+        selection = input("Choice: ").lower()
 
-        if choice == "s":
-            term = input("Search: ").lower()
-            filtered = [c for c in clients if term in c.lower()]
-            log_event(user, f"Searched clients: {term}")
-        elif choice == "r":
-            filtered = clients.copy()
-        elif choice == "q":
+        if selection == "s":
+            s = input("Search: ").lower()
+            filtered = [c for c in clients if s in c.lower()]
+            log_event(user, f"Searched clients for {s}")
+        elif selection == "r":
+            filtered = clients[:]
+        elif selection == "q":
             return
 
-# -------------------- DOCUMENT VAULT --------------------
 
+
+# list the available document files
+def load_docs():
+    items = []
+    n = 1
+    for name in os.listdir(PLAIN_DOC_DIR):
+        if name.endswith(".txt"):
+            items.append({"id": n, "title": name})
+            n += 1
+    return items
+
+
+
+# document vault viewer
 def show_documents(user):
-    docs = load_documents()
+    docs = load_docs()
 
     while True:
         clear()
-        print("=== ENCRYPTED DOCUMENT VAULT ===\n")
+        print("=== DOCUMENT VAULT ===\n")
+
         for d in docs:
             print(f"{d['id']}. {d['title']}")
 
-        print("\n[v] View | [d] Download | [b] Back")
+        print("\n[v] View   |  [d] Download  |  [b] Back")
         choice = input("Choice: ").lower()
 
         if choice == "b":
             return
 
+        # pick the document ID after user presses v/d
         try:
-            doc_id = int(input("Enter document ID: "))
+            doc_id = int(input("Document ID: "))
             doc = next(d for d in docs if d["id"] == doc_id)
         except:
-            print("Invalid document ID.")
+            print("Invalid ID.")
             pause()
             continue
 
-        plain_path = os.path.join(PLAIN_DOC_DIR, doc["title"])
-        enc_path = os.path.join(ENC_DOC_DIR, doc["title"] + ".enc")
+        # paths
+        plain_file = os.path.join(PLAIN_DOC_DIR, doc["title"])
+        enc_file = os.path.join(ENC_DOC_DIR, doc["title"] + ".enc")
 
-        if not os.path.exists(enc_path):
-            print("This file is not encrypted yet.")
+        if not os.path.exists(enc_file):
+            print("File isn’t encrypted yet.")
             pause()
             continue
 
-        with open(enc_path, "rb") as f:
-            decrypted = cipher.decrypt(f.read()).decode()
+        with open(enc_file, "rb") as f:
+            # decrypt to text
+            try:
+                decrypted_text = cipher.decrypt(f.read()).decode()
+            except:
+                print("There was an error in decrypting your file. Please try again.")
+                pause()
+                continue
 
         if choice == "v":
             clear()
-            print(f"=== {doc['title']} ===\n")
-            print(decrypted)
+            print(f"=== Viewing: {doc['title']} ===\n")
+            print(decrypted_text)
             log_event(user, f"Viewed {doc['title']}")
             pause()
 
         elif choice == "d":
-            with open(doc["title"], "w", encoding="utf-8") as f:
-                f.write(decrypted)
-            print("Downloaded locally.")
+            # save the decrypted text in the working folder
+            with open(doc["title"], "w", encoding="utf-8") as out:
+                out.write(decrypted_text)
+            print("File downloaded.")
             log_event(user, f"Downloaded {doc['title']}")
             pause()
 
-# -------------------- ENCRYPT FILE OPTION --------------------
 
+
+# encrypt a file option
 def encrypt_file(user):
-    files = [f for f in os.listdir(PLAIN_DOC_DIR) if f.endswith((".txt", ".docx"))]
+    files = [x for x in os.listdir(PLAIN_DOC_DIR) if x.endswith(".txt") or x.endswith(".docx")]     # allowing docx and tct files.
+
 
     if not files:
-        print("No TXT files to encrypt.")
+        print("There is nothing to encrypt.") #incase of errors
         pause()
         return
 
     clear()
-    print("=== ENCRYPT A FILE ===\n")
-    for i, f in enumerate(files, start=1):
+    print("=== ENCRYPT FILE ===\n")
+    for i, f in enumerate(files, start=1): #assigning numbers to the file names. reused
         print(f"{i}. {f}")
 
     try:
         choice = int(input("\nSelect file number: "))
-        fname = files[choice - 1]
+        file_name = files[choice - 1] #enumerated
     except:
-        print("Invalid selection.")
+        print("Invalid selection. Please try again.")
         pause()
         return
 
-    plain_path = os.path.join(PLAIN_DOC_DIR, fname)
-    enc_path = os.path.join(ENC_DOC_DIR, fname + ".enc")
+    in_path = os.path.join(PLAIN_DOC_DIR, file_name)
+    out_path = os.path.join(ENC_DOC_DIR, file_name + ".enc") #simple way to let you know this has file has been encrypted. without you having to open it
 
-    with open(plain_path, "rb") as f:
-        encrypted = cipher.encrypt(f.read())
+    with open(in_path, "rb") as f:
+        data = f.read()
 
-    with open(enc_path, "wb") as f:
-        f.write(encrypted)
+    enc = cipher.encrypt(data)
 
-    print(f"Encrypted file saved to: {enc_path}")
-    log_event(user, f"Encrypted {fname}")
+    with open(out_path, "wb") as f:
+        f.write(enc)
+
+    print(f"Saved: {out_path}")
+    log_event(user, f"Encrypted {file_name}")
     pause()
 
-# -------------------- LOG VIEW --------------------
 
-def view_logs(role):
-    if role != "admin":
-        print("Admin only.")
+
+# decrypt option
+def decrypt_file(user):
+    files = [x for x in os.listdir(ENC_DOC_DIR) if x.endswith(".enc")]
+
+    if not files:
+        print("No encrypted files.")
         pause()
         return
 
     clear()
-    print("=== ACCESS LOGS ===\n")
+    print("DECRYPT FILE\n")
+
+    for i, f in enumerate(files, start=1): #assign numbers
+        print(f"{i}. {f}")
+
+    try:
+        choice = int(input("\nPick file: "))
+        file_name = files[choice - 1]
+    except:
+        print("Invalid.")
+        pause()
+        return
+
+    encpath = os.path.join(ENC_DOC_DIR, file_name)
+    out_name = file_name.replace(".enc", "")
+    out_path = os.path.join(PLAIN_DOC_DIR, out_name)
+
+    try:
+        with open(encpath, "rb") as f:
+            raw = cipher.decrypt(f.read())
+
+        with open(out_path, "wb") as f:
+            f.write(raw)
+
+        print("Decrypted OK:", out_path)
+        log_event(user, f"Decrypted {file_name}")
+        pause()
+    except Exception as e: #exception handling
+        print("Error:", e)
+        pause()
+
+
+
+# view logs specifically for admins 
+def view_logs(role):
+    if role != "admin": # again only for admins can be changed though
+        print("Admins only.")
+        pause()
+        return
+
+    clear()
+    print("=== LOGS ===\n")
+
     if os.path.exists(LOG_FILE):
-        with open(LOG_FILE) as f:
+        with open(LOG_FILE, "r") as f:
             print(f.read())
     else:
-        print("No logs found.")
+        print("No logs yet.") #in case there is either no log file aka it is deletd or nothing has happened yet.
     pause()
 
-# -------------------- MAIN MENU --------------------
 
+
+# main menu loop
 def main_menu(user, role):
     while True:
         clear()
-        print("======================================")
-        print(" SECURE TERMINAL CYBERSECURITY SYSTEM ")
-        print("======================================\n")
-        print("1. View Clients (from TXT)")
-        print("2. View All Documents")
-        print("3. Encrypt a TXT File")
-        print("4. Decrypt a TXT File")
+        print("Welcome")
+        print("-------------------------------------------------------")
+
+        
+
+        print("1. View Clients")
+        print("2. View Documents")
+        print("3. Encrypt File")
+        print("4. Decrypt File")
         print("5. View Logs (Admin)")
         print("0. Logout\n")
 
-        choice = input("Select option: ")
+        Action = input("Select: ")
 
-        if choice == "1":
+        if Action == "1":
             show_clients(user)
-        elif choice == "2":
+        elif Action == "2":
             show_documents(user)
-        elif choice == "3":
+        elif Action == "3":
             encrypt_file(user)
-        elif choice == "4":
-            decrypt_file(user) 
-        elif choice == "5":
+        elif Action == "4":
+            decrypt_file(user)
+        elif Action == "5":
             view_logs(role)
-        elif choice == "0":
+        elif Action == "0":
             log_event(user, "Logged out")
             return
         else:
-            print("Invalid option.")
+            print("Try again.")
             pause()
 
-# -------------------- RUN --------------------
 
+
+# run everything
 if __name__ == "__main__":
     while True:
-        user, role = login()
-        if user:
-            main_menu(user, role)
+        u, r = login()
+        if u:
+            main_menu(u, r)
